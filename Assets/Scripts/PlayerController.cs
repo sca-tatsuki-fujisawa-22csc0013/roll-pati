@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public float speed = 0.03f;// “®‚­‘¬‚³
     public float y = 0;
     public float posz = 0;
+    public float z = 0;
     public Text scoreText;
     public Text winText;
     
@@ -36,8 +37,8 @@ public class PlayerController : MonoBehaviour
 
         if (transform.position.x < 13)
         {
-            posz = 0.1f;
-            var movement = new Vector3(-moveHorizontal, y, -posz);
+            z = 0.1f;
+            var movement = new Vector3(-moveHorizontal, y, -z);
             rb.AddForce(movement * speed);
         }
         else
@@ -65,6 +66,11 @@ public class PlayerController : MonoBehaviour
             score = score + 1;
 
             SetCountText();
+        }
+
+        if (other.gameObject.CompareTag("kugi"))
+        {
+            
         }
     }
 
