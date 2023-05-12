@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 0.03f;// 動く速さ
     public float y = 0;
+    public float posz = 0;
     public Text scoreText;
     public Text winText;
     
@@ -35,13 +36,14 @@ public class PlayerController : MonoBehaviour
 
         if (transform.position.x < 13)
         {
-            var movement = new Vector3(-moveHorizontal, y, -moveVertical);
+            posz = 0.1f;
+            var movement = new Vector3(-moveHorizontal, y, -posz);
             rb.AddForce(movement * speed);
         }
         else
         {
             //カーソルキーの入力に合わせて移動方向を設定
-            var movement = new Vector3(moveHorizontal, y, moveVertical);
+            var movement = new Vector3(0, y, moveVertical);
             //Rigitbodyに与えて球を動かす
             rb.AddForce(movement * speed);
         }

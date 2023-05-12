@@ -6,6 +6,7 @@ public class CameraController : MonoBehaviour
 {
     public GameObject player;
     private Vector3 offset;
+    bool coroutineBool = false;
 
     // Start is called before the first frame update
     void Start()
@@ -18,20 +19,25 @@ public class CameraController : MonoBehaviour
     {
         if(player.transform.position.x < 13)
         {
-            if(transform.rotation.y < 180)
+            if (!coroutineBool)
             {
-                for (int i = 0; i < 180; i++)
-                {
-                    transform.Rotate(new Vector3(0, i, 0) * Time.deltaTime);
-                }
-                return;
+                coroutineBool = true;
+                StartCoroutine("RightMove");
             }
-            
+            offset.y = 0;
             transform.position = player.transform.position - offset;
         }
         else
         {
             transform.position = player.transform.position + offset;
+        }
+    }
+    IEnumerator RightMove()
+    {
+        for (int turn = 0; turn < 180; turn++)
+        {
+            transform.Rotate(0, 1, 0);
+            yield return new WaitForSeconds(0.001f);
         }
     }
 }
